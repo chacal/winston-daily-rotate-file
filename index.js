@@ -589,6 +589,16 @@ DailyRotateFile.prototype._createStream = function () {
       }
     }
 
+    function resetStartTime() {
+      self._year = self._getTime('year');
+      self._month = self._getTime('month');
+      self._date = self._getTime('date');
+      self._hour = self._getTime('hour');
+      self._minute = self._getTime('minute');
+      self._weekday = weekday[self._getTime('day')];
+      self._created = 0;
+    }
+
     fs.stat(fullname, function (err, stats) {
       if (err) {
         if (err.code !== 'ENOENT') {
@@ -607,13 +617,7 @@ DailyRotateFile.prototype._createStream = function () {
       }
 
       if (self._filenameHasExpired()) {
-        self._year = self._getTime('year');
-        self._month = self._getTime('month');
-        self._date = self._getTime('date');
-        self._hour = self._getTime('hour');
-        self._minute = self._getTime('minute');
-        self._weekday = weekday[self._getTime('day')];
-        self._created = 0;
+        resetStartTime();
         return checkFile(self._getFile());
       }
 
