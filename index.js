@@ -143,25 +143,25 @@ var DailyRotateFile = module.exports = function (options) {
 
   this.getFormattedDate = function () {
     // update the year, month, date... variables
-    this._year = this._getTime('year');
-    this._month = this._getTime('month');
-    this._date = this._getTime('date');
-    this._hour = this._getTime('hour');
-    this._minute = this._getTime('minute');
-    this._weekday = weekday[this._getTime('day')];
+    var _year = this._getTime('year');
+    var _month = this._getTime('month');
+    var _date = this._getTime('date');
+    var _hour = this._getTime('hour');
+    var _minute = this._getTime('minute');
+    var _weekday = weekday[this._getTime('day')];
 
     var flags = {
-      yy: String(this._year).slice(2),
-      yyyy: this._year,
-      M: this._month + 1,
-      MM: pad(this._month + 1),
-      d: this._date,
-      dd: pad(this._date),
-      H: this._hour,
-      HH: pad(this._hour),
-      m: this._minute,
-      mm: pad(this._minute),
-      ddd: this._weekday
+      yy: String(_year).slice(2),
+      yyyy: _year,
+      M: _month + 1,
+      MM: pad(_month + 1),
+      d: _date,
+      dd: pad(_date),
+      H: _hour,
+      HH: pad(_hour),
+      m: _minute,
+      mm: pad(_minute),
+      ddd: _weekday
     };
     return this.datePattern.replace(token, function ($0) {
       return $0 in flags ? flags[$0] : $0.slice(1, $0.length - 1);
