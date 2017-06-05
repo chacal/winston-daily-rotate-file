@@ -605,6 +605,11 @@ DailyRotateFile.prototype._createStream = function () {
           return self.emit('error', err);
         }
 
+        if (self._filenameHasExpired()) {
+          resetStartTime();
+          return checkFile(self._getFile());
+        }
+
         return createAndFlush(0);
       }
 
